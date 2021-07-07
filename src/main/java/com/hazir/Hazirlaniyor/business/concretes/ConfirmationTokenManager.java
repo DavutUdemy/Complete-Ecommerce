@@ -14,18 +14,18 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ConfirmationTokenManager {
 
-    private final ConfirmationTokenDao confirmationTokenRepository;
+	private final ConfirmationTokenDao confirmationTokenRepository;
 
-    public void saveConfirmationToken(ConfirmationToken token) {
-        confirmationTokenRepository.save(token);
-    }
+	public void saveConfirmationToken(ConfirmationToken token) {
+		confirmationTokenRepository.save (token);
+	}
 
-    public Optional<ConfirmationToken> getToken(String token) {
-        return confirmationTokenRepository.findByToken(token);
-    }
+	public Optional<ConfirmationToken> getToken(String token) {
+		return confirmationTokenRepository.findByToken (token);
+	}
 
-    public int setConfirmedAt(String token) {
-        return confirmationTokenRepository.updateConfirmedAt(
-                token, LocalDateTime.now());
-    }
+	public int setConfirmedAt(String token) {
+		return confirmationTokenRepository.updateConfirmedAt (
+				token, LocalDateTime.now ());
+	}
 }

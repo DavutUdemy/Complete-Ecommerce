@@ -1,5 +1,6 @@
 package com.hazir.Hazirlaniyor.entity.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import java.util.Collection;
 import java.util.Collections;
-
+@AllArgsConstructor
 @Getter
 @EqualsAndHashCode
 @Entity
@@ -48,19 +49,31 @@ public class  AppUser implements UserDetails {
     public AppUser() {
     }
 
-    public AppUser(String firstName,
-                   String lastName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-    }
+	public AppUser(Long id, String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.appUserRole = appUserRole;
+	}
 
-    @Override
+	public AppUser(String firstName,
+	               String lastName,
+	               String email,
+	               String password,
+	               AppUserRole appUserRole) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.appUserRole = appUserRole;
+	}
+
+
+
+
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
                 new SimpleGrantedAuthority(appUserRole.name());

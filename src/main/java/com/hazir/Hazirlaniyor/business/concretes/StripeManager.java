@@ -20,23 +20,25 @@ import javax.annotation.PostConstruct;
 @Service
 public class StripeManager {
 
-	@Value("${STRIPE_SECRET_KEY}")
-	private String secretKey;
+	//@Value("${STRIPE_SECRET_KEY}")
+	private String secretKey = "sk_test_51IwROgKxKeI9Kf7eiuAGgointLDU6WrXsFjZKXT3SmYjpn8JSfSxQYhSnxeY3jfqWFImJwU7OZR9z1fe811gsTJ000QBorfwsZ";
+
 
 	@PostConstruct
 	public void init() {
 		Stripe.apiKey = secretKey;
 	}
+
 	public Charge charge(ChargeRequest chargeRequest)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		Map<String, Object> chargeParams = new HashMap<>();
-		chargeParams.put("amount", chargeRequest.getAmount());
-		chargeParams.put("currency", chargeRequest.getCurrency());
-		chargeParams.put("description", chargeRequest.getDescription());
-		chargeParams.put("source", chargeRequest.getStripeToken());
-		return Charge.create(chargeParams);
+	  throws AuthenticationException, InvalidRequestException,
+	  APIConnectionException, CardException, APIException {
+		Map<String, Object> chargeParams = new HashMap<> ();
+		chargeParams.put ("amount", chargeRequest.getAmount ());
+		chargeParams.put ("currency", chargeRequest.getCurrency ());
+		chargeParams.put ("description", chargeRequest.getDescription ());
+		chargeParams.put ("source", chargeRequest.getStripeToken ());
+		return Charge.create (chargeParams);
 	}
 
-	}
+}
 

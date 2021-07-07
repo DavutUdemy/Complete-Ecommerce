@@ -1,5 +1,8 @@
 package com.hazir.Hazirlaniyor.entity.concretes;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,6 +44,8 @@ public class ConfirmationToken {
             nullable = false,
             name = "app_user_id"
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+
     private AppUser appUser;
 
     public ConfirmationToken(String token,

@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -40,4 +39,16 @@ public class ForgotPassword {
 	@NotNull(message = "Repeated password can not be empty!")
 	private String repeatedPassword;
 
+	public ForgotPassword(Long id, String email, String password, String repeatedPassword) {
+		Id = id;
+		this.email = email;
+		this.password = password;
+		this.repeatedPassword = repeatedPassword;
+	}
+
+	public ForgotPassword(String email, String password, String repeatedPassword) {
+		this.email = email;
+		this.password = password;
+		this.repeatedPassword = repeatedPassword;
+	}
 }

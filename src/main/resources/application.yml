@@ -8,7 +8,7 @@ server:
 spring:
   datasource:
     password: 514010191
-    url: jdbc:postgresql://localhost:5432/calisartik
+    url: jdbc:postgresql://localhost:5432/yulaf
     username: postgres
 
 

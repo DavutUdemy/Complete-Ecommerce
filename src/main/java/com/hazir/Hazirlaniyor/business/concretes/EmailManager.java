@@ -19,26 +19,26 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class EmailManager implements EmailService {
 
-    private final static Logger LOGGER = LoggerFactory
-            .getLogger(EmailManager.class);
+	private final static Logger LOGGER = LoggerFactory
+			.getLogger (EmailManager.class);
 
-    private final JavaMailSender mailSender;
+	private final JavaMailSender mailSender;
 
-    @Override
-    @Async
-    public void send(String to, String email) {
-        try {
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(mimeMessage, "utf-8");
-            helper.setText(email, true);
-            helper.setTo(to);
-            helper.setSubject("Confirm your email");
-            helper.setFrom("nailmemmedova12@gmail.com");
-            mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            LOGGER.error("failed to send email", e);
-            throw new IllegalStateException("failed to send email");
-        }
-    }
+	@Override
+	@Async
+	public void send(String to, String email) {
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage ();
+			MimeMessageHelper helper =
+					new MimeMessageHelper (mimeMessage, "utf-8");
+			helper.setText (email, true);
+			helper.setTo (to);
+			helper.setSubject ("Confirm your email");
+			helper.setFrom ("nailmemmedova12@gmail.com");
+			mailSender.send (mimeMessage);
+		} catch (MessagingException e) {
+			LOGGER.error ("failed to send email", e);
+			throw new IllegalStateException ("failed to send email");
+		}
+	}
 }

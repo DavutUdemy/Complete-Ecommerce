@@ -2,7 +2,8 @@ package com.hazir.Hazirlaniyor.business.concretes;
 
 import com.hazir.Hazirlaniyor.business.abstracts.Facade;
 import com.hazir.Hazirlaniyor.business.abstracts.ForgotPasswordService;
-import com.hazir.Hazirlaniyor.core.utillities.BadRequest.BadRequestException;
+import com.hazir.Hazirlaniyor.core.utillities.results.Result;
+import com.hazir.Hazirlaniyor.core.utillities.results.SuccessResult;
 import com.hazir.Hazirlaniyor.dataAccess.abstracts.AppUserDao;
 import com.hazir.Hazirlaniyor.dataAccess.abstracts.ForgotPasswordDao;
 import com.hazir.Hazirlaniyor.dataAccess.abstracts.UpdatePasswordTokenDao;
@@ -15,17 +16,17 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
- public class ForgotPasswordManager implements ForgotPasswordService {
-	private final ForgotPasswordDao forgotPasswordDao;
-	private final Facade facade;
-	private final UpdatePasswordManager updatePasswordManager;
-	private final AppUserDao appUserDao;
+public class ForgotPasswordManager implements ForgotPasswordService {
+	private final ForgotPasswordDao          forgotPasswordDao;
+	private final Facade                     facade;
+	private final UpdatePasswordManager      updatePasswordManager;
+	private final AppUserDao                 appUserDao;
 	private final ForgotPasswordEmailManager emailManager;
-	private final AppUserManager appUserManager;
-  private final   UpdatePasswordTokenDao updatePasswordTokenDao;
-	private final   PasswordEncoder  passwordEncoder;
-	String token = UUID.randomUUID().toString();
-	String link = "http://localhost:8080/api/v1/forgot/confirm?token=" + token;
+	private final AppUserManager             appUserManager;
+	private final UpdatePasswordTokenDao     updatePasswordTokenDao;
+	private final PasswordEncoder            passwordEncoder;
+	String token = UUID.randomUUID ().toString ();
+	String link  = "http://localhost:8080/forgot/confirm?token=" + token;
 
 
 	public ForgotPasswordManager(ForgotPasswordDao forgotPasswordDao, Facade facade, UpdatePasswordManager updatePasswordManager, AppUserDao appUserDao, ForgotPasswordEmailManager emailManager, AppUserManager appUserManager, UpdatePasswordTokenDao updatePasswordTokenDao, PasswordEncoder passwordEncoder) {
@@ -40,17 +41,17 @@ import java.util.UUID;
 	}
 
 	@Override
-	public String requestForResetingPassword(String email) {
-		this.facade.validatorService.existsEmail (email);
+	public Result requestForResetingPassword(String email) {
+		this.facade.validatorService.existsEmail(email);
 		sendSuccessEmail(email);
 		UpdatePasswordToken updatePasswordToken = new UpdatePasswordToken (
 				token,
-				LocalDateTime.now(),
-				LocalDateTime.now().plusMinutes(15)
+				LocalDateTime.now (),
+				LocalDateTime.now ().plusMinutes (15)
 		);
 		this.updatePasswordTokenDao.save(updatePasswordToken);
 
-		return token;
+		return new SuccessResult ("Please Check Your Inbox :" + token);
 	}
 
 	@Override
@@ -63,14 +64,13 @@ import java.util.UUID;
 	}
 
 
-
 	@Override
-	public String updatePassword(ForgotPassword forgotPassword,String token) {
-		this.facade.validatorService.existsEmail(forgotPassword.getEmail ());
-		this.facade.validatorService.validateRepeatPassword(forgotPassword.getPassword (), forgotPassword.getRepeatedPassword ());
-		this.facade.validatorService.checkIfConfirmationTokenValid (updatePasswordManager,token);
-		this.appUserManager.updatePassword(forgotPassword.getPassword(),forgotPassword.getEmail());
-		return "Succesfully,Your password updated please Login! ";
+	public Result updatePassword(ForgotPassword forgotPassword, String token) {
+		this.facade.validatorService.existsEmail (forgotPassword.getEmail ());
+		this.facade.validatorService.validateRepeatPassword (forgotPassword.getPassword (), forgotPassword.getRepeatedPassword ());
+		this.facade.validatorService.checkIfConfirmationTokenValid (updatePasswordManager, token);
+		this.appUserManager.updatePassword (forgotPassword.getPassword (), forgotPassword.getEmail ());
+		return  new SuccessResult ("Succesfully,Your password updated please Login!");
 	}
 
 	@Override
@@ -121,4 +121,4 @@ import java.util.UUID;
 	}
 
 
-	}
+}

@@ -21,8 +21,9 @@ public class Facade {
 	public AppUserDao appUserDao;
 	public UpdatePasswordTokenDao updatePasswordTokenDao;
 	public ProductCheckerService productCheckerService;
+	public RegistrationService registrationService;
  @Autowired
-	public Facade(ShipmentService shipmentService, PaymentEmailManager paymentEmailManager, AfterPaymentSuccessService afterPaymentSuccessService, CartDao cartDao, ProductDao productDao,AppUserDao appUserDao, UpdatePasswordTokenDao updatePasswordTokenDao,ValidatorService validatorService, ProductCheckerService productCheckerDal){
+	public Facade(ShipmentService shipmentService, PaymentEmailManager paymentEmailManager, AfterPaymentSuccessService afterPaymentSuccessService, CartDao cartDao, ProductDao productDao,AppUserDao appUserDao, UpdatePasswordTokenDao updatePasswordTokenDao,ValidatorService validatorService, ProductCheckerService productCheckerDal,RegistrationService registrationService){
 		this.shipmentService = shipmentService;
 		this.paymentEmailManager = paymentEmailManager;
 	  this.cartDao = cartDao;
@@ -32,9 +33,7 @@ public class Facade {
 	  this.updatePasswordTokenDao = updatePasswordTokenDao;
 	  this.validatorService = new ValidatorDal (appUserDao,updatePasswordTokenDao);
 	  this.productCheckerService = new ProductCheckerDal (productDao);
-
-
-
+	  this.registrationService = new RegistrationDal();
 
 	}
 

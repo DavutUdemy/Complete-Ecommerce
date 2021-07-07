@@ -45,6 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 		ConfirmationTokenManager.class, BCryptPasswordEncoder.class})
 @ExtendWith(SpringExtension.class)
 public class AppUserManagerTest {
+	//DiffBlue
 	@MockBean
 	private EmailValidatorManager emailValidatorManager;
 

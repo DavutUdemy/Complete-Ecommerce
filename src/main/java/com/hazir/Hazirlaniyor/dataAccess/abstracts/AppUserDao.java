@@ -16,7 +16,7 @@ public interface AppUserDao extends JpaRepository<AppUser, Long> {
 
     Optional<AppUser> findByEmail(String email);
     @Query("SELECT s FROM AppUser s WHERE s.email=?1")
- boolean findUserByEmail(String email);
+    Optional<AppUser> findUserByEmail(String email);
     @Transactional
     @Modifying
     @Query("UPDATE AppUser a " +
@@ -31,5 +31,9 @@ public interface AppUserDao extends JpaRepository<AppUser, Long> {
 	boolean existsEmail(String email);
 	@Query("SELECT s FROM AppUser s WHERE s.email=?1")
 	Optional<AppUser> getUserByEmail(String email);
+	@Query("select  s from AppUser  s where s.firstName=?1")
+	Optional<AppUser> findUserByFirstName(String firstName);
+	@Query("select  s from AppUser s where s.email=?1 and  s.enabled=true")
+	Optional<AppUser> checkIfAccountEnabled(String email);
 
 }

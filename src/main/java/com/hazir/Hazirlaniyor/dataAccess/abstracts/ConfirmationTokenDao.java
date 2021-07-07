@@ -18,7 +18,7 @@ public interface ConfirmationTokenDao
 
     Optional<ConfirmationToken> findByToken(String token);
 
-    @Transactional
+
     @Modifying
     @Query("UPDATE ConfirmationToken c " +
             "SET c.confirmedAt = ?2 " +

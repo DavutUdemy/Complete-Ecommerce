@@ -1,5 +1,6 @@
 package com.hazir.Hazirlaniyor.dataAccess.abstracts;
 
+import com.hazir.Hazirlaniyor.core.utillities.results.DataResult;
 import com.hazir.Hazirlaniyor.entity.concretes.Product;
 import com.hazir.Hazirlaniyor.entity.concretes.ProductCategory;
 
@@ -30,4 +31,10 @@ public interface ProductDao extends JpaRepository<Product,Long> {
     Optional<Product> existsProductByProductName(String productName);
    @Query("DELETE  from Product c where c.productName=?1")
 	 void deleteByProductName(String productName);
+   @Query("select s from Product s where s.productName=?1")
+	 Optional<Product>findProductByProductName(String productName);
+	 @Query("SELECT s FROM Product s WHERE s.productName=?1")
+	 boolean checkIfProductExists(String productName);
+
+
 }

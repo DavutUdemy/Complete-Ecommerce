@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+
 public class UpdatePasswordToken {
 
 	@SequenceGenerator(

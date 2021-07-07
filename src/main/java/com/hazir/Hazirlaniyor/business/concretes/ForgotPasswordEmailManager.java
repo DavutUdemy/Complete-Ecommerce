@@ -16,9 +16,9 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ForgotPasswordEmailManager  implements EmailService {
+public class ForgotPasswordEmailManager implements EmailService {
 	private final static Logger LOGGER = LoggerFactory
-			.getLogger(EmailManager.class);
+			.getLogger (EmailManager.class);
 
 	private final JavaMailSender mailSender;
 
@@ -26,17 +26,17 @@ public class ForgotPasswordEmailManager  implements EmailService {
 	@Async
 	public void send(String to, String email) {
 		try {
-			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessage mimeMessage = mailSender.createMimeMessage ();
 			MimeMessageHelper helper =
-					new MimeMessageHelper(mimeMessage, "utf-8");
-			helper.setText(email, true);
-			helper.setTo(to);
-			helper.setSubject("Reset Password");
-			helper.setFrom("nailmemmedova12@gmail.com");
-			mailSender.send(mimeMessage);
+					new MimeMessageHelper (mimeMessage, "utf-8");
+			helper.setText (email, true);
+			helper.setTo (to);
+			helper.setSubject ("Reset Password");
+			helper.setFrom ("nailmemmedova12@gmail.com");
+			mailSender.send (mimeMessage);
 		} catch (MessagingException e) {
-			LOGGER.error("failed to send email", e);
-			throw new IllegalStateException("failed to send email");
+			LOGGER.error ("failed to send email", e);
+			throw new IllegalStateException ("failed to send email");
 		}
 	}
 }

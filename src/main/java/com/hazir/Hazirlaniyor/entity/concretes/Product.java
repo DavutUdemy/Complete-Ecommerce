@@ -1,6 +1,7 @@
 package com.hazir.Hazirlaniyor.entity.concretes;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table
 
-
+@NoArgsConstructor
+@Data
 
 public class Product  {
     @SequenceGenerator(
@@ -27,6 +29,10 @@ public class Product  {
     private Long Id;
     @NotNull(message = "ProductName can not be Empty")
     private String productName;
+    private String productImage;
+    private String productImage1;
+    private String productImage2;
+    private String productImage3;
 	  @NotNull(message = "Product Description can not be Empty")
 	  private String productDescription;
 	  @NotNull(message = "Product Price can not be Empty")
@@ -37,63 +43,26 @@ public class Product  {
 	  @NotNull(message = "Stock can not be empty ")
 	  private Integer unitsInStock;
 
-    public Product() {
-    }
+	public Product(Long id, String productName, String productImage, String productImage1, String productImage2, String productImage3, String productDescription, Integer productPrice, ProductCategory productCategory, Integer unitsInStock) {
+		Id = id;
+		this.productName = productName;
+		this.productImage = productImage;
+		this.productImage1 = productImage1;
+		this.productImage2 = productImage2;
+		this.productImage3 = productImage3;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.unitsInStock = unitsInStock;
+	}
 
-    public Product(Long id, String productName, String productDescription, Integer productPrice, ProductCategory productCategory, Integer unitsInStock) {
-        Id = id;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.productCategory = productCategory;
-        this.unitsInStock = unitsInStock;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
-    public Integer getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Integer productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public Integer getUnitsInStock() {
-        return unitsInStock;
-    }
-
-    public void setUnitsInStock(Integer unitsInStock) {
-        this.unitsInStock = unitsInStock;
-    }
+	public Product(Long id,String productName, String productImage,String productDescription, Integer productPrice, ProductCategory productCategory, Integer unitsInStock) {
+		Id = id;
+		this.productName = productName;
+		this.productImage = productImage;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.unitsInStock = unitsInStock;
+	}
 }

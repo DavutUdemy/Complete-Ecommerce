@@ -1,12 +1,13 @@
 package com.hazir.Hazirlaniyor.business.abstracts;
 
+import com.hazir.Hazirlaniyor.core.utillities.results.Result;
 import com.hazir.Hazirlaniyor.entity.concretes.ForgotPassword;
 import com.hazir.Hazirlaniyor.entity.concretes.SuccessEmail;
 
 public interface ForgotPasswordService {
-	public String requestForResetingPassword(String email);
+	public Result requestForResetingPassword(String email);
 	public void sendSuccessEmail(String email);
-	public String updatePassword(ForgotPassword forgotPassword,String token);
+	public Result updatePassword(ForgotPassword forgotPassword,String token);
 	String buildEmail(String Link);
 
 }
